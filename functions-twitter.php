@@ -242,8 +242,8 @@ function prepare_tweet_array($tweet, $is_qt=false) {
 	
 	//Cull unnecessary data
 	foreach ($tdata['entities'] as $k => &$etype)
-		if (empty($etype))
-			unset($tdata['entities'][$k]);
+		if ($k=='quoted_status') continue;
+		elseif (empty($etype)) unset($tdata['entities'][$k]);
 		else foreach ($etype as &$entity) {
 			$entity->id = $entity->id_str;
 			unset($entity->id_str);
